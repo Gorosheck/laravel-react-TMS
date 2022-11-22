@@ -1,10 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import reducer from "./listSlice";
+import { default as listReducer } from "./listSlice";
+import { default as articlesReducer } from "./articlesSlice";
+import { default as articleReducer } from "./articlesSlice";
+
 
 const store = configureStore(
     {
         reducer: {
-            items: reducer,
+            items: listReducer,
+            articles: articlesReducer,
+            article: articleReducer,
         },
     },
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()

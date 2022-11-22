@@ -22,26 +22,26 @@ const StorageShoppingList = withLocalStorage('shopping-list', ShoppingList);
 const StorageCount = withLocalStorage('counter', Counter);
 
 root.render(
-  <React.StrictMode>
-    <Provider store={ store }>
-      <NotificationProvider>
-        <BrowserRouter>
-        <Header/>
+  // <React.StrictMode>
+  <Provider store={store}>
+    <NotificationProvider>
+      <BrowserRouter>
+        <Header />
         <div className='container'>
-          <NotificationBar/>
+          <NotificationBar />
           <Routes>
-            <Route path='/' element={<Home/>}/>
-            <Route path='/about' element={<About/>}/>
+            <Route path='/' element={<Home />} />
+            <Route path='/about' element={<About />} />
             <Route path='/articles'>
-              <Route path=':id' element={<Post/>}/>
+              <Route path=':id' element={<Post />} />
             </Route>
-            <Route path='/todo' element={<ShoppingList/>}/>
+            <Route path='/todo' element={<ShoppingList />} />
           </Routes>
         </div>
-        </BrowserRouter>
-      </NotificationProvider>
-    </Provider>
-  </React.StrictMode>
+      </BrowserRouter>
+    </NotificationProvider>
+  </Provider>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

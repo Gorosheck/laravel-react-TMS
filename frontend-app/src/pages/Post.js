@@ -1,37 +1,27 @@
 import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { fetchArticleById } from '../store/articleSlice';
 
 
 const Post = () => {
     const { id } = useParams();
-
-    const dataLoaded = useRef(false);
-    const [article, setArticle] = useState(null);
+    const dispatch = useDispatch();
+    const { status, entity } = useSelector(state => state.article)
 
     useEffect(() => {
-        if (dataLoaded.current) {
-            return;
-        }
-        dataLoaded.current = true;
-
-        console.log(process.env.REACT_APP_API_URL);
-
-        const url = `${process.env.REACT_APP_API_URL}/api/articles/${id}`;
-        fetch(url)
-            .then(response => response.json())
-            .then(json => setArticle(json.data));
-
+        dispatch(fetchArticleById(id));
     }, []);
 
-    if (article === null) {
+    if (status === 'loading' || status === 'idle') {
         return <h1>Loading...</h1>
     }
 
     return (
         <>
-            <h3>{ article.title }</h3>
-            <h4>{ article.author.name }</h4>
-            <p>{ article.text }</p>
+            <h3>{entity.title}</h3>
+            <h4>{entity.author.name}</h4>
+            <p>{entity.text}</p>
         </>
     );
 };
