@@ -19,7 +19,7 @@ const initialState = {
 // };
 
 export const fetchArticles = createAsyncThunk('articles/fetchArticles', async () => {
-   const url = `${import.meta.env.VITE_API_URL}/api/articles`;
+   const url = `${process.env.REACT_APP_API_URL}/api/articles`;
    const response = await axios.get(url);
 
    return response.data;
